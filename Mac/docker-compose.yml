@@ -1,0 +1,103 @@
+version: '3'
+
+services:
+  #  MongoDB Server
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - hadoop_net
+
+  # Hadoop Master Node 
+  hadoop-master:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: hadoop-master
+    hostname: hadoop-master
+    environment:
+      - CLUSTER_NAME=test
+      - HDFS_NAMENODE=true
+      - HDFS_DATANODE=false
+      - YARN_NODENODE=false
+    ports:
+      - "50070:50070" # HDFS Web UI
+      - "8088:8088"   # ResourceManager Web UI
+    networks:
+      - hadoop_net
+    depends_on:
+      - mongo
+
+  # Hadoop first DataNode
+  hadoop-datanode1:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: hadoop-datanode1
+    hostname: hadoop-datanode1
+    environment:
+      - CLUSTER_NAME=test
+      - HDFS_NAMENODE=false
+      - HDFS_DATANODE=true
+      - YARN_NODENODE=true
+    networks:
+      - hadoop_net
+    depends_on:
+      - hadoop-master
+
+  # Hadoop second DataNode
+  hadoop-datanode2:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: hadoop-datanode2
+    hostname: hadoop-datanode2
+    environment:
+      - CLUSTER_NAME=test
+      - HDFS_NAMENODE=false
+      - HDFS_DATANODE=true
+      - YARN_NODENODE=true
+    networks:
+      - hadoop_net
+    depends_on:
+      - hadoop-master
+
+  # Hive Server
+  hive-server:
+    image: hive:latest
+    container_name: hive-server
+    environment:
+      - HIVE_HOME=/opt/hive
+    ports:
+      - "10000:10000"  # Porta do HiveServer2
+    networks:
+      - hadoop_net
+    depends_on:
+      - hadoop-master
+      - mongo
+
+  # Phoenix Server
+  phoenix-server:
+    image: apache/phoenix:latest
+    container_name: phoenix-server
+    ports:
+      - "8765:8765"  # Porta do Phoenix Query Server
+    networks:
+      - hadoop_net
+    depends_on:
+      - hive-server
+      - mongo
+
+  # Zeppelin
+  zeppelin:
+    image: apache/zeppelin:latest
+    container_name: zeppelin
+    environment:
+      - ZEPPELIN_PORT=8080
+    ports:
+      - "8080:8080"  # Porta do Zeppelin
+    networks:
+      - hadoop_net
+    depends_on:
+      - hive-server
+      - phoenix-server
+
+networks:
+  hadoop_net:
+    driver: bridge
