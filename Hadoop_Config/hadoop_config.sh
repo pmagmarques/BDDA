@@ -17,6 +17,7 @@ sudo apt-get install -y openjdk-8-jdk
 sudo apt-get install python3
 sudo apt-get install python3-pip
 sudo apt-get install python3-distutils
+pip install setuptools
 
 
 ## download hadoop and install
