@@ -4,26 +4,11 @@ FROM sequenceiq/hadoop-docker:latest
 FROM sequenceiq/hadoop-docker:2.7.1
 WORKDIR /opt
 # Install the dependencies
-RUN yum install -y wget curl apache2 sudo vim unzip vim openjdk-8-jdk mongodb
+##RUN yum install -y wget curl apache2 sudo vim unzip vim openjdk-8-jdk mongodb
 
 # dependencies
-# RUN apt-get update && \
-#   apt-get install -y wget \
-#    curl \
-#    unzip \
-#    vim \
-#    openjdk-8-jdk \
-#    mongodb
+ RUN yum install -y wget curl unzip vim openjdk-8-jdk mongodb
 
-
-#RUN apk && \
-#    apk add --nocache \ 
-#    wget \
-#    curl \
-#    unzip \
-#    vim \
-#    openjdk-8-jdk \
-#    mongodb
 
 
 
