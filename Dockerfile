@@ -1,10 +1,15 @@
 # Base Image with Hadoop
 FROM sequenceiq/hadoop-docker:latest
 
+FROM sequenceiq/hadoop-docker:2.7.1
+WORKDIR /opt
+# Install the dependencies
+RUN apt-get update && \
+    apt-get install -y wget curl apache2 sudo vim unzip vim openjdk-8-jdk √
+
 # dependencies
-#RUN apt-get update && \
-#    apt-get install -y \
-#    wget \
+# RUN apt-get update && \
+#   apt-get install -y wget \
 #    curl \
 #    unzip \
 #    vim \
@@ -13,7 +18,7 @@ FROM sequenceiq/hadoop-docker:latest
 
 
 #RUN apk && \
-#    apk add --nocache \
+#    apk add --nocache \ 
 #    wget \
 #    curl \
 #    unzip \
