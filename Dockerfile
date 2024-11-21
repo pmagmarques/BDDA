@@ -1,19 +1,18 @@
 # Base Image with Hadoop
 FROM sequenceiq/hadoop-docker:latest
 
-FROM sequenceiq/hadoop-docker:2.7.1
 WORKDIR /opt
 # Install the dependencies
 ##RUN yum install -y wget curl apache2 sudo vim unzip vim openjdk-8-jdk mongodb
 
 # dependencies
 
- RUN yum install -y vim 
- RUN yum install -y mongodb
- RUN yum install -y openjdk-8-jdk 
- RUN yum install -y wget  
- RUN yum install -y curl 
- RUN yum install -y unzip 
+ #RUN yum install -y vim 
+ #RUN yum install -y mongodb
+ #RUN yum install -y openjdk-8-jdk 
+ #RUN yum install -y wget  
+ #RUN yum install -y curl 
+ #RUN yum install -y unzip 
  
 
 
