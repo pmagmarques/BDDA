@@ -15,11 +15,6 @@ RUN wget https://archive.apache.org/dist/hive/hive-2.3.7/apache-hive-2.3.7-bin.t
     mv apache-hive-2.3.7-bin /opt/hive && \
     rm apache-hive-2.3.7-bin.tar.gz
 
-# Install Apache Phoenix
-RUN wget https://archive.apache.org/dist/phoenix/apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz && \
-    tar -xzvf apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz && \
-    mv apache-phoenix-4.14.3-HBase-1.7-bin /opt/phoenix && \
-    rm apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz
 
 # Install Apache Zeppelin
 RUN wget https://archive.apache.org/dist/zeppelin/zeppelin-0.9.0/zeppelin-0.9.0-bin-all.tgz && \
@@ -32,6 +27,12 @@ RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key 
     echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
     sudo apt-get update && \
     sudo apt-get install -y mongodb-org
+
+# Install Apache Phoenix
+RUN wget https://archive.apache.org/dist/phoenix/apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz && \
+    tar -xzvf apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz && \
+    mv apache-phoenix-4.14.3-HBase-1.7-bin /opt/phoenix && \
+    rm apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz
 
 # Envoironment Variables
 ENV HIVE_HOME=/opt/hive
