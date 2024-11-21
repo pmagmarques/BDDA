@@ -1,7 +1,7 @@
 # Base Image with Hadoop
-FROM sequenceiq/hadoop-docker:latest
+#FROM sequenceiq/hadoop-docker:latest
 
-FROM big-data-europe/docker-hadoop
+FROM big-data-europe/docker-hadoop:latest
 
 WORKDIR /opt
 # Install the dependencies
