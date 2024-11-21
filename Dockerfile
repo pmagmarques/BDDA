@@ -1,6 +1,8 @@
 # Base Image with Hadoop
 FROM sequenceiq/hadoop-docker:latest
 
+FROM big-data-europe/docker-hadoop
+
 WORKDIR /opt
 # Install the dependencies
 ##RUN yum install -y wget curl apache2 sudo vim unzip vim openjdk-8-jdk mongodb
