@@ -1,7 +1,7 @@
 ## Update and install dependencies
 
 sudo apt-get install  -y
-sudo apt-get install -y wget curl unzip vim openjdk-8-jdk 
+sudo apt-get install -y wget curl unzip vim tar
 
 
 ## install apache2 do be used as http server
@@ -19,10 +19,9 @@ sudo apt-get install python3-pip
 sudo apt-get install python3-distutils
 pip install setuptools
 
-
 ## download hadoop and install
 wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz
-tar -xzvf hadoop-2.7.1.tar.gz
+tar -xzvf hadoop-2.7.1.tar.gz 
 mv hadoop-2.7.1 /opt/hadoop
 
 ## dowload  Hive and install
@@ -35,10 +34,10 @@ wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.t
 tar -xvzf zookeeper-3.4.6.tar.gz
 mv zookeeper-3.4.6 /opt/zookeeper
 
-## Download and install Apache Phoenix
-wget https://archive.apache.org/dist/phoenix/apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz
-tar -xzvf apache-phoenix-4.14.3-HBase-1.7-bin.tar.gz
-mv apache-phoenix-4.14.3-HBase-1.7-bin /opt/phoenix
+## Download and install Apache Phoenix HBase
+wget https://archive.apache.org/dist/phoenix/apache-phoenix-4.15.0-HBase-1.5/bin/apache-phoenix-4.15.0-HBase-1.5-bin.tar.gz 
+tar -xzvf apache-phoenix-4.15.0-HBase-1.5-bin.tar.gz --warning=no-unknown-keyword
+mv apache-phoenix-4.15.0-HBase-1.5-bin /opt/phoenix
 
 # Instalar o Apache Zeppelin
 wget https://downloads.apache.org/zeppelin/zeppelin-0.9.0/zeppelin-0.9.0-bin-all.tgz
