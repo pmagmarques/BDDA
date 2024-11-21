@@ -1,5 +1,5 @@
 # Base Image with Hadoop
-FROM sequenceiq/hadoop-docker:2.7.1
+FROM sequenceiq/hadoop-docker:latest
 
 # dependencies
 #RUN apt-get update && \
@@ -12,14 +12,14 @@ FROM sequenceiq/hadoop-docker:2.7.1
 #    mongodb
 
 
-RUN apk && \
-    apk add --nocache \
-    wget \
-    curl \
-    unzip \
-    vim \
-    openjdk-8-jdk \
-    mongodb
+#RUN apk && \
+#    apk add --nocache \
+#    wget \
+#    curl \
+#    unzip \
+#    vim \
+#    openjdk-8-jdk \
+#    mongodb
 
 
 
