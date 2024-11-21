@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- Configuração do metastore -->
+  <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://localhost:9083</value>
+    <description>URI para o serviço do Hive Metastore. Defina como o endereço do Metastore do Hive.</description>
+  </property>
+
+  <!-- Definir a base do diretório de HDFS para armazenar os dados do Hive -->
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>/user/hive/warehouse</value>
+    <description>Diretório no HDFS onde os dados do Hive serão armazenados. A configuração padrão é `/user/hive/warehouse`.</description>
+  </property>
+
+  <!-- Definir o tipo de armazenamento do metastore -->
+  <property>
+    <name>hive.metastore.database</name>
+    <value>postgres</value>
+    <description>Banco de dados usado pelo Hive Metastore. Outros valores possíveis incluem `mysql`, `derby` (não recomendado para produção), etc.</description>
+  </property>
+
+  <!-- Definir o driver JDBC para o Metastore -->
+  <property>
+    <name>hive.metastore.jdbc.driver</name>
+    <value>org.postgresql.Driver</value>
+    <description>Driver JDBC para se conectar ao banco de dados do Metastore.</description>
+  </property>
+
+  <!-- Configuração para usar o HDFS como sistema de arquivos -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+    <description>Nome do sistema de arquivos Hadoop (HDFS).</description>
+  </property>
+
+  <!-- Configuração para definir o tempo de execução do Hive -->
+  <property>
+    <name>hive.execution.engine</name>
+    <value>mr</value>
+    <description>Define o tipo de mecanismo de execução do Hive. Pode ser `mr` (MapReduce) ou `tez` (Apache Tez).</description>
+  </property>
+
+  <!-- Definir a configuração para o modo de execução de MapReduce -->
+  <property>
+    <name>hive.mapred.mode</name>
+    <value>nonstrict</value>
+    <description>Define o modo de execução para as consultas do Hive. `strict` impõe regras mais rígidas, enquanto `nonstrict` permite mais flexibilidade.</description>
+  </property>
+
+  <!-- Definir o número máximo de reducers -->
+  <property>
+    <name>hive.exec.reducers.bytes.per.reducer</name>
+    <value>1000000</value>
+    <description>Define o número de bytes por reducer em uma operação MapReduce no Hive.</description>
+  </property>
+
+  <!-- Configuração de memória para o MapReduce -->
+  <property>
+    <name>mapreduce.map.memory.mb</name>
+    <value>2048</value>
+    <description>Define a quantidade de memória (em MB) para os map jobs do MapReduce no Hive.</description>
+  </property>
+
+  <property>
+    <name>mapreduce.reduce.memory.mb</name>
+    <value>2048</value>
+    <description>Define a quantidade de memória (em MB) para os reduce jobs do MapReduce no Hive.</description>
+  </property>
+
+  <!-- Configuração para o uso de HBase (se necessário) -->
+  <property>
+    <name>hive.hbase.cluster.distributed</name>
+    <value>true</value>
+    <description>Defina como `true` para configurar o Hive para usar o HBase em um cluster distribuído.</description>
+  </property>
+
+  <!-- Configuração do metastore do Hive para o uso de Kerberos -->
+  <property>
+    <name>hive.metastore.kerberos.principal</name>
+    <value>hive/_HOST@EXAMPLE.COM</value>
+    <description>Define o principal Kerberos para o Hive Metastore.</description>
+  </property>
+
+  <!-- Configuração de segurança -->
+  <property>
+    <name>hive.security.authorization.enabled</name>
+    <value>true</value>
+    <description>Ativa ou desativa a autorização de segurança no Hive. Quando ativado, permite definir permissões de acesso ao Hive.</description>
+  </property>
+
+  <!-- Configuração do HiveServer2 -->
+  <property>
+    <name>hive.server2.thrift.port</name>
+    <value>10000</value>
+    <description>Porta do HiveServer2 para a comunicação via Thrift. A porta padrão é 10000.</description>
+  </property>
+
+  <!-- Configuração de Log -->
+  <property>
+    <name>hive.exec.print.header</name>
+    <value>true</value>
+    <description>Ativa a impressão do cabeçalho na saída das consultas.</description>
+  </property>
+
+</configuration>
