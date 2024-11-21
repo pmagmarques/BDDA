@@ -8,12 +8,13 @@ WORKDIR /opt
 
 # dependencies
 
+ RUN yum install -y vim 
  RUN yum install -y mongodb
  RUN yum install -y openjdk-8-jdk 
  RUN yum install -y wget  
  RUN yum install -y curl 
  RUN yum install -y unzip 
- RUN yum install -y vim 
+ 
 
 
 
