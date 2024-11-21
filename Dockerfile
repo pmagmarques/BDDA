@@ -2,14 +2,26 @@
 FROM sequenceiq/hadoop-docker:2.7.1
 
 # dependencies
-RUN apt-get update && \
-    apt-get install -y \
+#RUN apt-get update && \
+#    apt-get install -y \
+#    wget \
+#    curl \
+#    unzip \
+#    vim \
+#    openjdk-8-jdk \
+#    mongodb
+
+
+RUN apk && \
+    apk add --nocache \
     wget \
     curl \
     unzip \
     vim \
     openjdk-8-jdk \
     mongodb
+
+
 
 # Apache Hive
 RUN wget https://archive.apache.org/dist/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz && \
