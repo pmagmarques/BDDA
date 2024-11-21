@@ -7,10 +7,13 @@ WORKDIR /opt
 ##RUN yum install -y wget curl apache2 sudo vim unzip vim openjdk-8-jdk mongodb
 
 # dependencies
- 
- RUN yum install -y openjdk-8-jdk 
+
  RUN yum install -y mongodb
- RUN yum install -y wget curl unzip vim 
+ RUN yum install -y openjdk-8-jdk 
+ RUN yum install -y wget  
+ RUN yum install -y curl 
+ RUN yum install -y unzip 
+ RUN yum install -y vim 
 
 
 
