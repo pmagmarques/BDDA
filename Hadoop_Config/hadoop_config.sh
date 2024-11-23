@@ -1,12 +1,15 @@
-## Update and install dependencies
+## install & Update and install dependencies
 
 sudo apt-get install -y
 sudo apt-get update -y
 sudo apt-get install -y wget curl unzip vim tar
+sudo apt-get install -y gnupg
+
 
 
 ## install apache2 do be used as http server
 sudo apt-get install -y apache2
+
 
 ## Insall mongodb for fun
 sudo apt-get install -y mongodb
@@ -18,7 +21,9 @@ sudo apt-get install -y openjdk-8-jdk
 sudo apt-get install -y python3
 sudo apt-get install -y python3-pip
 sudo apt-get install -y python3-distutils
-pip install setuptools
+python3 -m pip install --upgrade pip
+pip install --upgrade pip
+pip3 install setuptools
 
 ## download hadoop and install
 wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz
@@ -40,13 +45,14 @@ wget https://archive.apache.org/dist/phoenix/apache-phoenix-4.15.0-HBase-1.5/bin
 tar -xzvf apache-phoenix-4.15.0-HBase-1.5-bin.tar.gz --warning=no-unknown-keyword
 mv apache-phoenix-4.15.0-HBase-1.5-bin /opt/phoenix
 
-# Instalar o Apache Zeppelin
+## Instalar o Apache Zeppelin
 wget https://downloads.apache.org/zeppelin/zeppelin-0.9.0/zeppelin-0.9.0-bin-all.tgz
 tar -xvzf zeppelin-0.9.0-bin-all.tgz
 mv zeppelin-0.9.0-bin-all /opt/zeppelin
 
-# Instalar o Apache Superset
-pip3 install apache-superset
+## Instalar o Apache Superset
+## pip3 install apache-superset
+## Error in distutils python package
 
-# Start http service with apache2
+## Start http service with apache2
 sudo systemctl start apache2
