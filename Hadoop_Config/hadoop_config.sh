@@ -1,20 +1,12 @@
 ## Update and install dependencies
 
-sudo apt-get install  -y
+sudo apt-get install -y
+sudo apt-get update -y
 sudo apt-get install -y wget curl unzip vim tar
 
 
 ## install apache2 do be used as http server
 sudo apt-get install -y apache2
-
-wget http://archive.apache.org/dist/httpd/httpd-2.4.57.tar.gz
-tar -xvzf httpd-2.4.57.tar.gz
-
-sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
-cd httpd-2.4.57
-./configure --enable-so
-make
-sudo make install
 
 ## Insall mongodb for fun
 sudo apt-get install -y mongodb
@@ -23,9 +15,9 @@ sudo apt-get install -y mongodb
 sudo apt-get install -y openjdk-8-jdk 
 
 ## Config Python  
-sudo apt-get install python3
-sudo apt-get install python3-pip
-sudo apt-get install python3-distutils
+sudo apt-get install -y python3
+sudo apt-get install -y python3-pip
+sudo apt-get install -y python3-distutils
 pip install setuptools
 
 ## download hadoop and install
