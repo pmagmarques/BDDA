@@ -1,0 +1,24 @@
+name: Setup Environment
+
+on:
+  push:
+    branches:
+      - main   # O workflow será disparado em um push na branch "main"
+  workflow_dispatch:   # Permite disparar manualmente a ação através da interface do GitHub
+
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest  # O job será executado em um ambiente Ubuntu mais recente
+
+    steps:
+      # Verificar o código do repositório
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Configurar o ambiente (executar o script setupenv.sh)
+      - name: Executar Script setupenv.sh
+        run: |
+          echo "setupenv.sh"
+          bash /home/codespace/setupenv.sh   # Caminho do script que você deseja executar
+        shell: bash
+
