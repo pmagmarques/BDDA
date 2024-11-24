@@ -17,6 +17,35 @@
         th {
             background-color: #f2f2f2;
         }
+        .container {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .rectangle {
+            width: 300px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .sub-rectangle {
+            background-color: #FFC107;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .process {
+            font-size: 18px;
+            margin-top: 5px;
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +96,53 @@
             <td>It is an open-source web server software that provides HTTP services for serving web content. It is commonly used in the Hadoop ecosystem for serving web interfaces. sudo service apache2 start starts the Apache web server.</td>
         </tr>
     </table>
+
+
+    <div class="container">
+    <!-- Layer 1 - Bottom Layer (HDFS) -->
+    <div class="rectangle">
+        <div class="title">DataNode</div>
+        <div class="process">Data storage</div>
+    </div>
+    
+    <div class="rectangle">
+        <div class="title">NameNode</div>
+        <div class="process">Namespace management</div>
+    </div>
+    
+    <!-- Layer 2 (YARN) -->
+    <div class="rectangle sub-rectangle">
+        <div class="title">NodeManager</div>
+        <div class="process">Manages resources on the node</div>
+    </div>
+    
+    <div class="rectangle sub-rectangle">
+        <div class="title">ResourceManager</div>
+        <div class="process">Resource management across the cluster</div>
+    </div>
+    
+    <!-- Layer 3 (MapReduce) -->
+    <div class="rectangle">
+        <div class="title">MapReduce</div>
+        <div class="process">Data processing</div>
+    </div>
+    
+    <!-- Layer 4 (Coordination Services) -->
+    <div class="rectangle sub-rectangle">
+        <div class="title">Zookeeper</div>
+        <div class="process">Coordination and synchronization</div>
+    </div>
+    
+    <div class="rectangle sub-rectangle">
+        <div class="title">Hive</div>
+        <div class="process">SQL-like queries</div>
+    </div>
+    
+    <div class="rectangle sub-rectangle">
+        <div class="title">HBase</div>
+        <div class="process">Real-time NoSQL storage</div>
+    </div>
+</div>
 
     <h1>Gráfico Interativo com Plotly</h1>
     <!--iframe src="grafico_interativo.html" width="100%" height="800px"></iframe--!>
