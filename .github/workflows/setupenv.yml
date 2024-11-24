@@ -19,6 +19,6 @@ jobs:
       - name: Executar Script setupenv.sh
         run: |
           echo "setupenv.sh"
-          bash /home/codespace/setupenv.sh   # Caminho do script que você deseja executar
+          bash Hadoop_Config/setupenv.sh   # Caminho do script que você deseja executar
         shell: bash
 
