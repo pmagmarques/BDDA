@@ -27,13 +27,30 @@
             <th>Description</th>
         </tr>
         <tr>
+            <td>Hadoop</td>
+            <td>Hadoop is a framework that allows for the distributed processing of large data sets across clusters of computers using simple programming models.</td>
+        </tr>
+        <tr>
+            <td>HDFS</td>
+            <td>It is a distributed, fault-tolerant file system designed to store and manage large volumes of data across a distributed cluster. It is a core component of Hadoop, providing the scalable storage layer needed to store data for big data processing frameworks like MapReduce, Spark, Hive, and others. HDFS is optimized for high throughput, scalability, and reliability, making it suitable for processing and storing big data.</td>
+        </tr>
+        <tr>
+            <td>HIVE</td>
+            <td>It is a data warehouse system built on top of Hadoop that enables the management, summarization, querying, and analysis of large datasets stored in Hadoop’s HDFS (Hadoop Distributed File System). It provides a high-level interface for interacting with data, which allows users to run SQL-like queries on data stored in Hadoop, without needing to write complex MapReduce code.</td>
+        </tr>
+        <tr>
+            <td>YARN</td>
+            <td>(Yet Another Resource Negotiator) It is the resource and job management layer in Hadoop that enables efficient utilization of cluster resources and supports diverse applications and workloads</td>
+        </tr>
+        <tr>
+            <td><B></B>MapReduce</td>
+            <td>is a programming model and processing technique used for handling large-scale data processing in a distributed computing environment, most commonly associated with the Hadoop ecosystem. It enables the parallel processing of massive datasets across multiple machines, breaking down complex tasks into smaller, manageable pieces</td>
+        </tr>
+        <tr>
             <td>Zookeeper</td>
             <td>Zookeeper is a centralized service for maintaining configuration information, naming, and providing synchronization across distributed systems. It is used by many Hadoop ecosystem components to manage configuration and coordination tasks.</td>
         </tr>
-        <tr>
-            <td>Hadoop</td>
-            <td>Hadoop is a framework that allows for the distributed processing of large data sets across clusters of computers using simple programming models. start-dfs.sh is used to start the Hadoop Distributed File System (HDFS), and start-yarn.sh is used to start YARN (Yet Another Resource Negotiator) for resource management.</td>
-        </tr>
+
         <tr>
             <td>HBase</td>
             <td>HBase is a distributed, scalable, NoSQL database that is modeled after Google's Bigtable. It runs on top of HDFS and is used for real-time read/write access to large datasets. start-hbase.sh is used to start the HBase service.</td>
@@ -47,12 +64,12 @@
             <td>Phoenix is a SQL skin for HBase, providing an interface to interact with HBase using SQL queries. It runs as a client application and connects to HBase via Zookeeper. sqlline.py is used to launch the Phoenix shell to execute SQL commands.</td>
         </tr>
         <tr>
-            <td>Apache2</td>
-            <td>Apache2 is an open-source web server software that provides HTTP services for serving web content. It is commonly used in the Hadoop ecosystem for serving web interfaces. sudo service apache2 start starts the Apache web server.</td>
-        </tr>
-        <tr>
             <td>Zeppelin</td>
             <td>Apache Zeppelin is a web-based notebook that enables interactive data analytics and collaborative data science. It supports multiple languages, including Scala, Python, and SQL, and can integrate with Hadoop and other big data tools. zeppelin-daemon.sh start is used to start the Zeppelin service.</td>
+        </tr>
+                <tr>
+            <td>Apache2</td>
+            <td>Apache2 is an open-source web server software that provides HTTP services for serving web content. It is commonly used in the Hadoop ecosystem for serving web interfaces. sudo service apache2 start starts the Apache web server.</td>
         </tr>
     </table>
 
