@@ -1,103 +1,144 @@
 version: '3'
 
 services:
-  #  MongoDB Server
-  mongo:
-    image: mongo:latest
-    container_name: mongo
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 10
+      ZOOKEEPER_SYNC_LIMIT: 5
     ports:
-      - "27017:27017"
+      - "2181:2181"
     networks:
-      - hadoop_net
+      - hadoop-network
 
-  # Hadoop Master Node 
-  hadoop-master:
+  hadoop-namenode:
     image: sequenceiq/hadoop-docker:2.7.1
-    container_name: hadoop-master
-    hostname: hadoop-master
+    container_name: hadoop-namenode
+    command: /etc/bootstrap.sh -d
     environment:
-      - CLUSTER_NAME=test
-      - HDFS_NAMENODE=true
-      - HDFS_DATANODE=false
-      - YARN_NODENODE=false
+      HDFS_CONF_dfs_namenode_rpc_address: "namenode:9000"
+      HDFS_CONF_dfs_namenode_http_address: "namenode:50070"
     ports:
-      - "50070:50070" # HDFS Web UI
-      - "8088:8088"   # ResourceManager Web UI
+      - "50070:50070"
+      - "9000:9000"
+    volumes:
+      - hdfs-namenode:/hadoop/dfs/name
     networks:
-      - hadoop_net
+      - hadoop-network
     depends_on:
-      - mongo
+      - zookeeper
 
-  # Hadoop first DataNode
-  hadoop-datanode1:
+  hadoop-datanode:
     image: sequenceiq/hadoop-docker:2.7.1
-    container_name: hadoop-datanode1
-    hostname: hadoop-datanode1
+    container_name: hadoop-datanode
+    command: /etc/bootstrap.sh -d
     environment:
-      - CLUSTER_NAME=test
-      - HDFS_NAMENODE=false
-      - HDFS_DATANODE=true
-      - YARN_NODENODE=true
+      HDFS_CONF_dfs_datanode_data_dir: "/hadoop/dfs/data"
+    ports:
+      - "50075:50075"
+    volumes:
+      - hdfs-datanode:/hadoop/dfs/data
     networks:
-      - hadoop_net
+      - hadoop-network
     depends_on:
-      - hadoop-master
+      - hadoop-namenode
 
-  # Hadoop second DataNode
-  hadoop-datanode2:
+  yarn-resourcemanager:
     image: sequenceiq/hadoop-docker:2.7.1
-    container_name: hadoop-datanode2
-    hostname: hadoop-datanode2
+    container_name: yarn-resourcemanager
     environment:
-      - CLUSTER_NAME=test
-      - HDFS_NAMENODE=false
-      - HDFS_DATANODE=true
-      - YARN_NODENODE=true
+      YARN_CONF_yarn_resourcemanager_hostname: "resourcemanager"
+      YARN_CONF_yarn_resourcemanager_address: "resourcemanager:8032"
+    ports:
+      - "8088:8088"
     networks:
-      - hadoop_net
+      - hadoop-network
     depends_on:
-      - hadoop-master
+      - hadoop-namenode
 
-  # Hive Server
-  hive-server:
-    image: hive:latest
-    container_name: hive-server
+  yarn-nodemanager:
+    image: sequenceiq/hadoop-docker:2.7.1
+    container_name: yarn-nodemanager
     environment:
-      - HIVE_HOME=/opt/hive
-    ports:
-      - "10000:10000"  # Porta do HiveServer2
+      YARN_CONF_yarn_nodemanager_local_dirs: "/tmp/hadoop-yarn"
     networks:
-      - hadoop_net
+      - hadoop-network
     depends_on:
-      - hadoop-master
-      - mongo
+      - yarn-resourcemanager
 
-  # Phoenix Server
-  phoenix-server:
-    image: apache/phoenix:latest
-    container_name: phoenix-server
+  hbase:
+    image: harisekhon/hbase:latest
+    container_name: hbase
+    environment:
+      HBASE_MASTER: "hbase-master"
     ports:
-      - "8765:8765"  # Porta do Phoenix Query Server
+      - "16010:16010"
     networks:
-      - hadoop_net
+      - hadoop-network
     depends_on:
-      - hive-server
-      - mongo
+      - zookeeper
 
-  # Zeppelin
+  phoenix:
+    image: cloudera/phoenix:latest
+    container_name: phoenix
+    ports:
+      - "8765:8765"
+    networks:
+      - hadoop-network
+    depends_on:
+      - hbase
+
+  hive-server2:
+    image: bde2020/hive:latest
+    container_name: hive-server2
+    environment:
+      HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
+    ports:
+      - "10000:10000"
+    networks:
+      - hadoop-network
+    depends_on:
+      - hadoop-namenode
+      - hbase
+
+  hue:
+    image: cloudera/hue:latest
+    container_name: hue
+    environment:
+      HUE_DATABASE_URL: "jdbc:mysql://hue-mysql:3306/hue"
+    ports:
+      - "8888:8888"
+    networks:
+      - hadoop-network
+    depends_on:
+      - hive-server2
+
+  apache2:
+    image: httpd:2.4
+    container_name: apache2
+    ports:
+      - "80:80"
+    networks:
+      - hadoop-network
+
   zeppelin:
     image: apache/zeppelin:latest
     container_name: zeppelin
     environment:
-      - ZEPPELIN_PORT=8080
+      ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
     ports:
-      - "8080:8080"  # Porta do Zeppelin
+      - "8080:8080"
     networks:
-      - hadoop_net
+      - hadoop-network
     depends_on:
-      - hive-server
-      - phoenix-server
+      - hive-server2
 
 networks:
-  hadoop_net:
+  hadoop-network:
     driver: bridge
+
+volumes:
+  hdfs-namenode:
+  hdfs-datanode:
