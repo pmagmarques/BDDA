@@ -110,7 +110,7 @@ services:
 
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
-    image: apache/zeppelin:latest
+    image: apache/zeppelin:0.9.0
     container_name: zeppelin
     environment:
       ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
