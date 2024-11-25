@@ -62,7 +62,7 @@ services:
   # Zookeeper - Used by HBase, Kafka, etc.
   zookeeper:
     image: zookeeper:3.6
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: zookeeper
     environment:
       ZOOKEEPER_TICK_TIME: 2000
@@ -75,8 +75,8 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: openiamdocker/hbase:alpine-4.2.1.3-latest
-    platform: linux/arm64/v8
+    image: hxzzz/hbase:latest
+    platform: linux/amd64
     container_name: hbase
     environment:
       HBASE_MASTER: "MainServer"
@@ -90,7 +90,7 @@ services:
   # Hive Server2 - Data warehouse system built on Hadoop
   hive:
     image: apache/hive:4.0.1
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: hive
     environment:
       HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
@@ -104,7 +104,7 @@ services:
   # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
   hue:
     image: gethue/hue:latest
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: hue
     environment:
       HUE_DATABASE_URL: "jdbc:mysql://hue-mysql:3306/hue"
@@ -118,7 +118,7 @@ services:
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
     image: apache/zeppelin:0.11.2
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: zeppelin
     environment:
       ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
