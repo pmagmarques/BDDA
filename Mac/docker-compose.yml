@@ -3,7 +3,7 @@ version: '3'
 services:
   # MainServer - Master Node
   mainserver:
-    image: bde2020/hadoop:latest 
+    image: apache/hadoop:latest 
     container_name: MainServer
     hostname: MainServer
     environment:
@@ -26,7 +26,7 @@ services:
 
   # Server1 - Slave Node 1
   server1:
-    image: bde2020/hadoop:latest 
+    image: apache/hadoop:latest 
     container_name: Server1
     hostname: Server1
     environment:
@@ -42,7 +42,7 @@ services:
 
   # Server2 - Slave Node 2
   server2:
-    image: bde2020/hadoop:latest 
+    image: apache/hadoop:latest 
     container_name: Server2
     hostname: Server2
     environment:
@@ -84,7 +84,7 @@ services:
 
   # Hive Server2 - Data warehouse system built on Hadoop
   hive:
-    image: bde2020/hive:latest
+    image: apache/hive:latest
     container_name: hive
     environment:
       HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
@@ -110,7 +110,7 @@ services:
 
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
-    image: apache/zeppelin:0.9.0
+    image: apache/zeppelin:lates
     container_name: zeppelin
     environment:
       ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
