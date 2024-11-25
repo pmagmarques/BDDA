@@ -21,7 +21,6 @@ services:
     depends_on:
       - zookeeper
       - mongodb
-      - hive
       - hbase
       - zeppelin
 
@@ -94,7 +93,6 @@ services:
     networks:
       - hadoop-network
     depends_on:
-      - mainserver
       - hbase
 
   # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
