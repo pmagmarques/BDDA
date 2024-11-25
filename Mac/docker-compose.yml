@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+  # Zookeeper
   zookeeper:
     image: wurstmeister/zookeeper:3.4.6
     container_name: zookeeper
@@ -13,16 +14,18 @@ services:
     networks:
       - hadoop-network
 
-  hadoop-namenode:
+  # Hadoop Master - NameNode and ResourceManager
+  hadoop-master:
     image: sequenceiq/hadoop-docker:2.7.1
-    container_name: hadoop-namenode
+    container_name: hadoop-master
     command: /etc/bootstrap.sh -d
     environment:
-      HDFS_CONF_dfs_namenode_rpc_address: "namenode:9000"
-      HDFS_CONF_dfs_namenode_http_address: "namenode:50070"
+      HDFS_CONF_dfs_namenode_rpc_address: "hadoop-master:9000"
+      YARN_CONF_yarn_resourcemanager_hostname: "hadoop-master"
+      HDFS_CONF_dfs_namenode_http_address: "hadoop-master:50070"
     ports:
-      - "50070:50070"
-      - "9000:9000"
+      - "50070:50070" # NameNode Web UI
+      - "8088:8088"   # ResourceManager Web UI
     volumes:
       - hdfs-namenode:/hadoop/dfs/name
     networks:
@@ -30,56 +33,52 @@ services:
     depends_on:
       - zookeeper
 
-  hadoop-datanode:
+  # Hadoop Slave 1 - DataNode and NodeManager
+  hadoop-slave1:
     image: sequenceiq/hadoop-docker:2.7.1
-    container_name: hadoop-datanode
+    container_name: hadoop-slave1
     command: /etc/bootstrap.sh -d
     environment:
       HDFS_CONF_dfs_datanode_data_dir: "/hadoop/dfs/data"
     ports:
-      - "50075:50075"
+      - "50075:50075" # DataNode Web UI
     volumes:
       - hdfs-datanode:/hadoop/dfs/data
     networks:
       - hadoop-network
     depends_on:
-      - hadoop-namenode
+      - hadoop-master
 
-  yarn-resourcemanager:
+  # Hadoop Slave 2 - DataNode and NodeManager
+  hadoop-slave2:
     image: sequenceiq/hadoop-docker:2.7.1
-    container_name: yarn-resourcemanager
+    container_name: hadoop-slave2
+    command: /etc/bootstrap.sh -d
     environment:
-      YARN_CONF_yarn_resourcemanager_hostname: "resourcemanager"
-      YARN_CONF_yarn_resourcemanager_address: "resourcemanager:8032"
+      HDFS_CONF_dfs_datanode_data_dir: "/hadoop/dfs/data"
     ports:
-      - "8088:8088"
+      - "50076:50075" # DataNode Web UI (Slave 2)
+    volumes:
+      - hdfs-datanode2:/hadoop/dfs/data
     networks:
       - hadoop-network
     depends_on:
-      - hadoop-namenode
+      - hadoop-master
 
-  yarn-nodemanager:
-    image: sequenceiq/hadoop-docker:2.7.1
-    container_name: yarn-nodemanager
-    environment:
-      YARN_CONF_yarn_nodemanager_local_dirs: "/tmp/hadoop-yarn"
-    networks:
-      - hadoop-network
-    depends_on:
-      - yarn-resourcemanager
-
+  # HBase
   hbase:
     image: harisekhon/hbase:latest
     container_name: hbase
     environment:
       HBASE_MASTER: "hbase-master"
     ports:
-      - "16010:16010"
+      - "16010:16010" # HBase Web UI
     networks:
       - hadoop-network
     depends_on:
       - zookeeper
 
+  # Phoenix
   phoenix:
     image: cloudera/phoenix:latest
     container_name: phoenix
@@ -90,50 +89,63 @@ services:
     depends_on:
       - hbase
 
+  # Hive Server2
   hive-server2:
     image: bde2020/hive:latest
     container_name: hive-server2
     environment:
       HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
     ports:
-      - "10000:10000"
+      - "10000:10000" # Hive Web UI
     networks:
       - hadoop-network
     depends_on:
-      - hadoop-namenode
+      - hadoop-master
       - hbase
 
+  # Hue - Web UI for Hadoop ecosystem
   hue:
     image: cloudera/hue:latest
     container_name: hue
     environment:
       HUE_DATABASE_URL: "jdbc:mysql://hue-mysql:3306/hue"
     ports:
-      - "8888:8888"
+      - "8888:8888" # Hue Web UI
     networks:
       - hadoop-network
     depends_on:
       - hive-server2
 
+  # Apache2 (for web interface)
   apache2:
     image: httpd:2.4
     container_name: apache2
     ports:
-      - "80:80"
+      - "80:80"  # Apache Web Server
     networks:
       - hadoop-network
 
+  # Zeppelin
   zeppelin:
     image: apache/zeppelin:latest
     container_name: zeppelin
     environment:
       ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
     ports:
-      - "8080:8080"
+      - "8080:8080" # Zeppelin Web UI
     networks:
       - hadoop-network
     depends_on:
       - hive-server2
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017" # MongoDB
+    networks:
+      - hadoop-network
 
 networks:
   hadoop-network:
@@ -142,3 +154,4 @@ networks:
 volumes:
   hdfs-namenode:
   hdfs-datanode:
+  hdfs-datanode2:
