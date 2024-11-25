@@ -75,7 +75,7 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: openiamdocker/hbase
+    image: openiamdocker/hbase:alpine-4.2.1.3-latest
     platform: linux/arm64/v8
     container_name: hbase
     environment:
