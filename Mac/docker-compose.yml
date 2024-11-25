@@ -58,7 +58,7 @@ services:
 
   # Zookeeper - Used by HBase, Kafka, etc.
   zookeeper:
-    image: wurstmeister/zookeeper:3.6
+    image: zookeeper:3.6
     container_name: zookeeper
     environment:
       ZOOKEEPER_TICK_TIME: 2000
