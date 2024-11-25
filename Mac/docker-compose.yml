@@ -84,7 +84,7 @@ services:
 
   # Hive Server2 - Data warehouse system built on Hadoop
   hive:
-    image: apache/hive
+    
     container_name: hive
     environment:
       HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
