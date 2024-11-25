@@ -3,7 +3,7 @@ version: '3'
 services:
   # MainServer - Master Node
   mainserver:
-    image: apache/hadoop:latest 
+    image: apache/hadoop
     container_name: MainServer
     hostname: MainServer
     environment:
@@ -26,7 +26,7 @@ services:
 
   # Server1 - Slave Node 1
   server1:
-    image: apache/hadoop:latest 
+    image: apache/hadoop
     container_name: Server1
     hostname: Server1
     environment:
@@ -42,7 +42,7 @@ services:
 
   # Server2 - Slave Node 2
   server2:
-    image: apache/hadoop:latest 
+    image: apache/hadoop
     container_name: Server2
     hostname: Server2
     environment:
