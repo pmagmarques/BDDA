@@ -1,0 +1,159 @@
+version: '3'
+
+services:
+  # MainServer - Master Node
+  mainserver:
+    image: apache/hadoop:3.4.1
+    platform: linux/arm64/v8
+    container_name: MainServer
+    hostname: MainServer
+    environment:
+      - HDFS_CONF_dfs_namenode_rpc_address=MainServer:9000
+      - HDFS_CONF_dfs_namenode_http_address=MainServer:50070
+      - YARN_CONF_yarn_resourcemanager_hostname=MainServer
+    ports:
+      - "50070:50070"
+      - "9000:9000"
+      - "8088:8088"
+    volumes:
+      - hdfs-namenode:/hadoop/dfs/name
+    networks:
+      - hadoop-network
+    depends_on:
+      - zookeeper
+      - mongodb
+      - hbase
+      - zeppelin
+
+  # Server1 - Slave Node 1
+  server1:
+    image: apache/hadoop:3.4.1
+    platform: linux/arm64/v8
+    container_name: Server1
+    hostname: Server1
+    environment:
+      - HDFS_CONF_dfs_datanode_data_dir=/hadoop/dfs/data
+    ports:
+      - "50075:50075"
+    volumes:
+      - hdfs-datanode:/hadoop/dfs/data
+    networks:
+      - hadoop-network
+    depends_on:
+      - mainserver
+
+  # Server2 - Slave Node 2
+  server2:
+    image: apache/hadoop:3.4.1
+    platform: linux/arm64/v8
+    container_name: Server2
+    hostname: Server2
+    environment:
+      - HDFS_CONF_dfs_datanode_data_dir=/hadoop/dfs/data
+    ports:
+      - "50075:50075"
+    volumes:
+      - hdfs-datanode:/hadoop/dfs/data
+    networks:
+      - hadoop-network
+    depends_on:
+      - mainserver
+
+  # Zookeeper - Used by HBase, Kafka, etc.
+  zookeeper:
+    image: zookeeper:3.6
+    platform: linux/arm64/v8
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 10
+      ZOOKEEPER_SYNC_LIMIT: 5
+    ports:
+      - "2181:2181"
+    networks:
+      - hadoop-network
+
+  # HBase - Distributed NoSQL Database
+  hbase:
+    image: harisekhon/hbase:latest
+    platform: linux/arm64/v8
+    container_name: hbase
+    environment:
+      HBASE_MASTER: "MainServer"
+    ports:
+      - "16010:16010"
+    networks:
+      - hadoop-network
+    depends_on:
+      - zookeeper
+
+  # Hive Server2 - Data warehouse system built on Hadoop
+  hive:
+    image: apache/hive:4.0.1
+    platform: linux/arm64/v8
+    container_name: hive
+    environment:
+      HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
+    ports:
+      - "10000:10000"
+    networks:
+      - hadoop-network
+    depends_on:
+      - hbase
+
+  # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
+  hue:
+    image: gethue/hue:latest
+    platform: linux/arm64/v8
+    container_name: hue
+    environment:
+      HUE_DATABASE_URL: "jdbc:mysql://hue-mysql:3306/hue"
+    ports:
+      - "8888:8888"
+    networks:
+      - hadoop-network
+    depends_on:
+      - hive
+
+  # Zeppelin - Web-based notebook for interactive data analysis
+  zeppelin:
+    image: apache/zeppelin:0.11.2
+    platform: linux/arm64/v8
+    container_name: zeppelin
+    environment:
+      ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
+    ports:
+      - "8080:8080"
+    networks:
+      - hadoop-network
+    depends_on:
+      - hive
+
+  # Apache2 - Web server (optional, for web-based services)
+  apache2:
+    image: httpd:2.4
+    container_name: apache2
+    ports:
+      - "80:80"
+    networks:
+      - hadoop-network
+
+  # MongoDB - NoSQL Database for storing data
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    networks:
+      - hadoop-network
+
+networks:
+  hadoop-network:
+    driver: bridge
+
+volumes:
+  hdfs-namenode:
+  hdfs-datanode:
