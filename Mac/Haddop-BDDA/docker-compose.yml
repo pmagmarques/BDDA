@@ -75,8 +75,8 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: harisekhon/hbase:2.1
-    #platform: linux/arm64/v8
+    image: openiamdocker/hbase
+    platform: linux/arm64/v8
     container_name: hbase
     environment:
       HBASE_MASTER: "MainServer"
