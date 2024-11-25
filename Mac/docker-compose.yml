@@ -84,9 +84,9 @@ services:
       - zookeeper
 
   # Hive Server2 - Data warehouse system built on Hadoop
-  hive-server2:
+  hive:
     image: bde2020/hive:latest
-    container_name: hive-server2
+    container_name: hive
     environment:
       HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
     ports:
@@ -108,7 +108,7 @@ services:
     networks:
       - hadoop-network
     depends_on:
-      - hive-server2
+      - hive
 
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
@@ -121,7 +121,7 @@ services:
     networks:
       - hadoop-network
     depends_on:
-      - hive-server2
+      - hive
 
   # Apache2 - Web server (optional, for web-based services)
   apache2:
