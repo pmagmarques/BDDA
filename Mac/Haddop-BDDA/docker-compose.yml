@@ -4,7 +4,7 @@ services:
   # MainServer - Master Node
   mainserver:
     image: apache/hadoop:3.4.1
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: MainServer
     hostname: MainServer
     environment:
@@ -28,7 +28,7 @@ services:
   # Server1 - Slave Node 1
   server1:
     image: apache/hadoop:3.4.1
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: Server1
     hostname: Server1
     environment:
@@ -45,7 +45,7 @@ services:
   # Server2 - Slave Node 2
   server2:
     image: apache/hadoop:3.4.1
-    platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: Server2
     hostname: Server2
     environment:
