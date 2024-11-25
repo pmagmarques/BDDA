@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+  # HDFS - Hadoop Distributed File System
+  hdfs-namenode:
+    image: sequenceiq/hadoop-docker:latest
+    environment:
+      - CLUSTER_NAME=hadoop-cluster
+      - HDFS_NAMENODE=true
+    ports:
+      - "50070:50070"
+    volumes:
+      - hdfs_namenode_data:/hadoop/dfs/name
+
+  hdfs-datanode:
+    image: sequenceiq/hadoop-docker:latest
+    environment:
+      - CLUSTER_NAME=hadoop-cluster
+      - HDFS_DATANODE=true
+    ports:
+      - "50075:50075"
+    volumes:
+      - hdfs_datanode_data:/hadoop/dfs/data
+
+  # YARN - Yet Another Resource Negotiator
+  yarn-resourcemanager:
+    image: sequenceiq/hadoop-docker:latest
+    environment:
+      - YARN_RESOURCEMANAGER=true
+    ports:
+      - "8088:8088"
+
+  yarn-nodemanager:
+    image: sequenceiq/hadoop-docker:latest
+    environment:
+      - YARN_NODEMANAGER=true
+    ports:
+      - "8042:8042"
+
+  # MapReduce
+  mapreduce:
+    image: sequenceiq/hadoop-docker:latest
+    environment:
+      - MAPREDUCE=true
+
+  # HBase
+  hbase-master:
+    image: hbase:latest
+    environment:
+      - HBASE_MASTER=true
+    ports:
+      - "16000:16000"
+
+  # Phoenix
+  phoenix:
+    image: openiamdocker/phoenix:latest
+    environment:
+      - PHOENIX=true
+
+  # Hive
+  hive-server:
+    image: bde2020/hive:latest
+    environment:
+      - HIVE_SERVER=true
+    ports:
+      - "10000:10000"
+
+  # Hue
+  hue:
+    image: gethue/hue:latest
+    environment:
+      - HUE=true
+    ports:
+      - "8888:8888"
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_DB=true
+    ports:
+      - "27017:27017"
+
+  # Zookeeper
+  zookeeper:
+    image: zookeeper:latest
+    environment:
+      - ZOOKEEPER=true
+    ports:
+      - "2181:2181"
+
+  # Zeppelin
+  zeppelin:
+    image: apache/zeppelin:latest
+    environment:
+      - ZEPPELIN=true
+    ports:
+      - "8080:8080"
+
+volumes:
+  hdfs_namenode_data:
+  hdfs_datanode_data:
