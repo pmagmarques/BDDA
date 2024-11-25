@@ -51,7 +51,7 @@ services:
     environment:
       - HDFS_CONF_dfs_datanode_data_dir=/hadoop/dfs/data
     ports:
-      - "50075:50075"
+      - "50080:50080"
     volumes:
       - hdfs-datanode:/hadoop/dfs/data
     networks:
