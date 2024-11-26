@@ -86,6 +86,7 @@ services:
       - hadoop-network
     depends_on:
       - zookeeper
+      
 
   # Hive Server2 - Data warehouse system built on Hadoop
   hive:
@@ -114,6 +115,19 @@ services:
       - hadoop-network
     depends_on:
       - hive
+
+  # Phoenix - 
+  phoenix:
+    image: openiamdocker/phoenix:latest
+    platform: linux/arm64
+    container_name: phoenix
+    ports:
+      - "8765:8765"  # Phoenix UI or service port
+    networks:
+      - hadoop-network
+    depends_on:
+      - hbase-master
+      - zookeeper
 
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
