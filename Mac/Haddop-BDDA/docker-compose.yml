@@ -128,7 +128,7 @@ services:
     networks:
       - hadoop-network
     depends_on:
-      - hbase-master
+      - hbase
       - zookeeper
 
   # Zeppelin - Web-based notebook for interactive data analysis
