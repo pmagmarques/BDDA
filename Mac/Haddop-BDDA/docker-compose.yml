@@ -3,8 +3,8 @@
 services:
   # MainServer - Master Node
   mainserver:
-    image: apache/hadoop:3.4.1
-    platform: linux/amd64
+    image: sequenceiq/hadoop-docker
+    platform: linux/arm64
     container_name: MainServer
     hostname: MainServer
     environment:
@@ -27,8 +27,8 @@ services:
 
   # Server1 - Slave Node 1
   server1:
-    image: apache/hadoop:3.4.1
-    platform: linux/amd64
+    image: sequenceiq/hadoop-docker
+    platform: linux/arm64
     container_name: Server1
     hostname: Server1
     environment:
@@ -44,8 +44,8 @@ services:
 
   # Server2 - Slave Node 2
   server2:
-    image: apache/hadoop:3.4.1
-    platform: linux/amd64
+    image: sequenceiq/hadoop-docker
+    platform: linux/arm64
     container_name: Server2
     hostname: Server2
     environment:
@@ -62,7 +62,7 @@ services:
   # Zookeeper - Used by HBase, Kafka, etc.
   zookeeper:
     image: zookeeper:3.6
-    platform: linux/amd64
+    platform: linux/arm64
     container_name: zookeeper
     environment:
       ZOOKEEPER_TICK_TIME: 2000
@@ -75,8 +75,8 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: hxzzz/hbase:latest
-    platform: linux/amd64
+    image: hbase:latest
+    platform: linux/arm64
     container_name: hbase
     environment:
       HBASE_MASTER: "MainServer"
@@ -90,7 +90,7 @@ services:
   # Hive Server2 - Data warehouse system built on Hadoop
   hive:
     image: apache/hive:4.0.1
-    platform: linux/amd64
+    platform: linux/arm64
     container_name: hive
     environment:
       HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
@@ -104,7 +104,7 @@ services:
   # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
   hue:
     image: gethue/hue:latest
-    platform: linux/amd64
+    platform: linux/arm64
     container_name: hue
     environment:
       HUE_DATABASE_URL: "jdbc:mysql://hue-mysql:3306/hue"
@@ -118,7 +118,7 @@ services:
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
     image: apache/zeppelin:0.11.2
-    platform: linux/amd64
+    platform: linux/arm64
     container_name: zeppelin
     environment:
       ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
