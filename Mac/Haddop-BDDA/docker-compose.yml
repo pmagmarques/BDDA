@@ -75,7 +75,7 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: zenoss/hbase:24.0.10
+    image: zenoss/hbase
     platform: linux/arm64
     container_name: hbase
     environment:
