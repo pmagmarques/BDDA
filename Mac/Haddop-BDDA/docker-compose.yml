@@ -75,7 +75,7 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: arizephoenix/phoenix:commit-6aea2d5
+    image: harisekhon/hbase
     platform: linux/arm64
     container_name: hbase
     environment:
