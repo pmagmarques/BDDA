@@ -104,7 +104,7 @@ services:
 
   # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
   hue:
-    image: pmagmarques/hue:latest
+    image: pmagmarques/hue
     platform: linux/amd64
     container_name: hue
     environment:
