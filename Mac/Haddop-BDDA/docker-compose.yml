@@ -134,7 +134,7 @@ services:
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
     image: apache/zeppelin:0.11.2
-    platform: linux/arm64
+    platform: linux/amd64
     container_name: zeppelin
     environment:
       ZEPPELIN_NOTEBOOK_DIR: "/notebooks"
