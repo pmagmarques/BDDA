@@ -133,7 +133,7 @@ services:
 
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
-    image: pmagmarques/zeppelin:patest
+    image: pmagmarques/zeppelin:latest
     platform: linux/amd64
     container_name: zeppelin
     environment:
