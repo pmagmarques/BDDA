@@ -75,8 +75,8 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: harisekhon/hbase
-    platform: linux/amd64
+    image: pmagmarques/hbase
+    platform: linux/arm64
     container_name: hbase
     environment:
       HBASE_MASTER: "MainServer"
@@ -104,7 +104,7 @@ services:
 
   # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
   hue:
-    image: gethue/hue:latest
+    image: pmagmarques/hue:latest
     platform: linux/amd64
     container_name: hue
     environment:
@@ -133,7 +133,7 @@ services:
 
   # Zeppelin - Web-based notebook for interactive data analysis
   zeppelin:
-    image: apache/zeppelin:0.11.2
+    image: pmagmarques/zeppelin:patest
     platform: linux/amd64
     container_name: zeppelin
     environment:
