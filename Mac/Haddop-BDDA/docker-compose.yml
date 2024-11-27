@@ -105,7 +105,7 @@ services:
   # Hue - Web interface for Hadoop (UI for HDFS, Hive, etc.)
   hue:
     image: pmagmarques/hue
-    platform: linux/amd64
+    platform: linux/arm64
     container_name: hue
     environment:
       HUE_DATABASE_URL: "jdbc:mysql://hue-mysql:3306/hue"
