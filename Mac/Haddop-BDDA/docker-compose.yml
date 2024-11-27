@@ -118,7 +118,7 @@ services:
 
   # Phoenix - 
   phoenix:
-    image: openiamdocker/phoenix:latest
+    image: arizephoenix/phoenix:commit-6aea2d5
     platform: linux/arm64
     container_name: phoenix
     environment:
