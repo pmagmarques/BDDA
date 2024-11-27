@@ -75,7 +75,7 @@ services:
 
   # HBase - Distributed NoSQL Database
   hbase:
-    image: wongnai/hbase:master
+    image: bitnami/hbase:latest
     platform: linux/arm64
     container_name: hbase
     environment:
