@@ -1,26 +1,26 @@
 ## install & Update and install dependencies
 
-sudo apt-get install -y
-sudo apt-get update -y
-sudo apt-get install -y wget curl unzip vim tar
-sudo apt-get install -y gnupg
+sudo dnf install -y
+sudo dnf update -y
+sudo dnf install -y wget curl unzip vim tar
+sudo dnf install -y gnupg
 
 
 
 ## install apache2 do be used as http server
-sudo apt-get install -y apache2
+sudo dnf install -y apache2
 
 
 ## Insall mongodb for fun
-sudo apt-get install -y mongodb
+sudo dnf install -y mongodb
 
 ## Insall jdk 
-sudo apt-get install -y openjdk-8-jdk 
+sudo dnf install -y openjdk-8-jdk 
 
 ## Config Python  
-sudo apt-get install -y python3
-sudo apt-get install -y python3-pip
-sudo apt-get install -y python3-distutils
+sudo dnf install -y python3
+sudo dnf install -y python3-pip
+sudo dnf install -y python3-distutils
 python3 -m pip install --upgrade pip
 pip install --upgrade pip
 pip3 install setuptools
