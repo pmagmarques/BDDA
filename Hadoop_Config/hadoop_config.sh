@@ -7,12 +7,14 @@ sudo dnf install -y gnupg
 
 
 
-## install apache2 do be used as http server
-sudo dnf install -y apache2
+## install apache http server do be used as http server
+wget https://downloads.apache.org/httpd/httpd-2.4.62.tar.gz
+tar -xzvf httpd-2.4.62.tar.gz
+mv httpd-2.4.62 opt/apachehttp
 
 
-## Insall mongodb for fun
-sudo dnf install -y mongodb
+## Install postgresql  for fun
+sudo dnf install -y postgresql-server
 
 ## Insall jdk 
 sudo dnf install -y openjdk-8-jdk 
