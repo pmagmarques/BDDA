@@ -1,0 +1,14 @@
+  GNU nano 7.2                                                            /opt/zeppelin/conf/zeppelin-site.xml                                                            Modified  
+<!-- nano /opt/zeppelin/conf/zeppelin-site.xmlcc  -->
+
+<configuration>
+    <property>
+        <name>zeppelin.hbase.zookeeper.quorum</name>
+        <value>master,slave1,slave2</value>
+    </property>
+    <property>
+        <name>zeppelin.hive.metastore.uri</name>
+        <value>thrift://master:9083</value>
+    </property>
+</configuration>
+
