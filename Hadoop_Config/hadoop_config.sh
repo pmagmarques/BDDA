@@ -13,7 +13,7 @@ tar -xzvf httpd-2.4.62.tar.gz
 mv httpd-2.4.62 opt/apachehttp
 
 
-## Install postgresql  for fun
+## Install postgresql  for fun. I might not going to use it
 sudo dnf install -y postgresql-server
 
 ## Insall jdk 
@@ -47,9 +47,18 @@ wget https://archive.apache.org/dist/phoenix/apache-phoenix-4.15.0-HBase-1.5/bin
 tar -xzvf apache-phoenix-4.15.0-HBase-1.5-bin.tar.gz --warning=no-unknown-keyword
 mv apache-phoenix-4.15.0-HBase-1.5-bin opt/phoenix
 
-## Instalar o Apache Zeppelin
+## Download and install Apache Zeppelin
 wget https://downloads.apache.org/zeppelin/zeppelin-0.9.0/zeppelin-0.9.0-bin-all.tgz
 tar -xvzf zeppelin-0.9.0-bin-all.tgz
 mv zeppelin-0.9.0-bin-all opt/zeppelin
+
+## Download and install Apache to import Postgre into hadoop Hadoop
+##wget https://downloads.apache.org/sqoop/1.4.7/sqoop-1.4.7.tar.gz 
+##tar -xvzf sqoop-1.4.7.tar.gz 
+##sudo mv sqoop-1.4.7.tar.gz  opt/sqoop
+## Not Uncompress
+
+
+
 
 
