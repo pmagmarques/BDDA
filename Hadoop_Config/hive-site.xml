@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-  <!-- Configuração do metastore -->
+  <!-- Metastore configuration -->
   <property>
     <name>hive.metastore.uris</name>
     <value>thrift://localhost:9083</value>
-    <description>URI para o serviço do Hive Metastore. Defina como o endereço do Metastore do Hive.</description>
   </property>
 
-  <!-- Definir a base do diretório de HDFS para armazenar os dados do Hive -->
+
   <property>
     <name>hive.metastore.warehouse.dir</name>
     <value>/user/hive/warehouse</value>
-    <description>Diretório no HDFS onde os dados do Hive serão armazenados. A configuração padrão é `/user/hive/warehouse`.</description>
   </property>
 
-  <!-- Definir o tipo de armazenamento do metastore -->
+  <!-- -->
   <property>
     <name>hive.metastore.database</name>
     <value>postgres</value>
@@ -26,7 +24,6 @@
   <property>
     <name>hive.metastore.jdbc.driver</name>
     <value>org.postgresql.Driver</value>
-    <description>Driver JDBC para se conectar ao banco de dados do Metastore.</description>
   </property>
 
   <!-- Configuração para usar o HDFS como sistema de arquivos -->
