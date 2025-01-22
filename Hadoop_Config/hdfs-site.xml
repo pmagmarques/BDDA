@@ -18,11 +18,15 @@
 
 <configuration>
     <property>
-        <name>dfs.namenode.name.dir</name>
-        <value>/workspaces/Docker_BDDA/hadoop/main/hdfs/namenode</value>
+	      <name>dfs.replication</name>
+        <value>3</value>
     </property>
     <property>
-        <name>dfs.datanode.data.dir</name>
-        <value>/workspaces/Docker_BDDA/hadoop/main/hdfs/datanode</value>
+	      <name>dfs.namenode.name.dir</name>
+        <value>file:/opt/hadoop/data/dfs/namenode</value>
+    </property>
+    <property>
+	      <name>dfs.datanode.data.dir</name>
+        <value>file:/opt/hadoop/data/dfs/datanode</value>
     </property>
 </configuration>
