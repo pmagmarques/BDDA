@@ -13,9 +13,18 @@
   limitations under the License. See accompanying LICENSE file.
 -->
 
-<configuration>
+<configuration> 
+<!-- Site specific YARN configuration properties -->
     <property>
-        <name>yarn.resourcemanager.hostname</name>
-        <value>127.0.0.0</value>
+	      <name>yarn.resourcemanager.address</name>
+        <value>master:8032</value>
+    </property>
+    <property>
+	      <name>yarn.nodemanager.local-dirs</name>
+        <value>/opt/hadoop/data/yarn/local</value>
+    </property>
+    <property>
+	      <name>yarn.nodemanager.log-dirs</name>
+        <value>/opt/hadoop/data/yarn/logs</value>
     </property>
 </configuration>
