@@ -17,7 +17,7 @@ mv httpd-2.4.62 opt/apachehttp
 sudo dnf install -y postgresql-server
 
 ## Insall jdk 
-sudo dnf install -y openjdk-8-jdk 
+sudo dnf install java-1.8.0-openjdk-devel
 
 ## Config Python  
 sudo dnf install -y python3
