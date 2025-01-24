@@ -30,7 +30,7 @@ pip3 install setuptools
 ## download hadoop and install
 wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz
 tar -xzvf hadoop-2.7.1.tar.gz 
-mv hadoop-2.7.1 opt/hadoop
+mv hadoop-2.7.1 /opt/hadoop
 
 ## dowload  Hive and install
 wget https://archive.apache.org/dist/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz
