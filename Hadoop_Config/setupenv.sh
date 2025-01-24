@@ -6,7 +6,9 @@ export HADOOP_PREFIX=$HADOOP_HOME
 
 export HIVE_HOME=/opt/hive
 
+export HBASE_HOME=/opt/hbase
+
 export ZOOKEEPER_HOME=/opt/zookeeper
 
-export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/scbin:$HIVE_HOME/bin:$ZOOKEEPER_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/scbin:$HIVE_HOME/bin:$ZOOKEEPER_HOME/bin:$HBASE_HOME/bin
  
