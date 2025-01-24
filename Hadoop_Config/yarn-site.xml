@@ -16,15 +16,15 @@
 <configuration> 
 <!-- Site specific YARN configuration properties -->
     <property>
-	      <name>yarn.resourcemanager.address</name>
+	<name>yarn.resourcemanager.address</name>
         <value>master:8032</value>
     </property>
     <property>
-	      <name>yarn.nodemanager.local-dirs</name>
+	<name>yarn.nodemanager.local-dirs</name>
         <value>/opt/hadoop/data/yarn/local</value>
     </property>
     <property>
-	      <name>yarn.nodemanager.log-dirs</name>
+	<name>yarn.nodemanager.log-dirs</name>
         <value>/opt/hadoop/data/yarn/logs</value>
     </property>
 </configuration>
