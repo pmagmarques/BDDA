@@ -10,5 +10,7 @@ export HBASE_HOME=/opt/hbase
 
 export ZOOKEEPER_HOME=/opt/zookeeper
 
+export HADOOP_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/scbin:$HIVE_HOME/bin:$ZOOKEEPER_HOME/bin:$HBASE_HOME/bin
  
