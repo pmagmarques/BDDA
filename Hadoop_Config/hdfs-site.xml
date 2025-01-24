@@ -18,15 +18,15 @@
 
 <configuration>
     <property>
-	      <name>dfs.replication</name>
+	<name>dfs.replication</name>
         <value>3</value>
     </property>
     <property>
-	      <name>dfs.namenode.name.dir</name>
+	<name>dfs.namenode.name.dir</name>
         <value>file:/opt/hadoop/data/dfs/namenode</value>
     </property>
     <property>
-	      <name>dfs.datanode.data.dir</name>
+	<name>dfs.datanode.data.dir</name>
         <value>file:/opt/hadoop/data/dfs/datanode</value>
     </property>
 </configuration>
